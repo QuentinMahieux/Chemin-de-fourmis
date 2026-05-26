@@ -1,0 +1,65 @@
+using UnityEngine;
+
+public class Sommet : MonoBehaviour
+{
+    public int id;
+    public Edge[] edges;
+    public DefaultZone defaultZone;
+    public bool isBloked;
+    public GameObject visualBloker;
+    
+    void OnDrawGizmos()
+    {
+        if (edges == null) return;
+        foreach (var edge in edges)
+        {
+            if (MutualNeighbor(edge.neighbour)) Gizmos.color = Color.darkRed;
+            else Gizmos.color = Color.darkBlue;
+            
+            if (!edge.neighbour) return;
+            Gizmos.DrawLine(transform.position, edge.neighbour.transform.position);
+        }
+    }
+
+    void Start()
+    {
+        visualBloker.SetActive(isBloked);
+        foreach (Edge e in edges)
+        {
+            e.size = DistanceToNeighbour(e.neighbour.transform);
+        }
+    }
+    
+    float DistanceToNeighbour(Transform cible)
+    {
+        return Vector2.Distance(transform.position, cible.transform.position);
+    }
+
+    bool MutualNeighbor(Sommet neighbour)
+    {
+        if(neighbour == null) return false;
+        if(neighbour.edges == null) return false;
+        
+        foreach (var edge in neighbour.edges)
+        {
+            if (edge.neighbour.name == this.name) return true;
+        }
+        return false;
+    }
+
+    public void TallClutter()
+    {
+        isBloked = !isBloked;
+        visualBloker.SetActive(isBloked);
+    }
+    
+}
+
+
+
+[System.Serializable]
+public class Edge
+{
+    public Sommet neighbour;
+    [HideInInspector]public float size = 1;
+}

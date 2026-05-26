@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab28552e5d05c464888aef9fb666661d, type: 3}
+  m_Name: AntData
+  m_EditorClassIdentifier: Assembly-CSharp::AntData
+  <life>k__BackingField: 10
+  <speed>k__BackingField: 2.7
+  <force>k__BackingField: 0
+  <work>k__BackingField: 0
+  <sociability>k__BackingField: 5
+  prefab: {fileID: 3301304317243413284, guid: 28c2ad98c550a6d439a749da4f706f44, type: 3}
