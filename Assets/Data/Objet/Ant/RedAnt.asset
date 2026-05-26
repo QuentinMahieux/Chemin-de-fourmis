@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab28552e5d05c464888aef9fb666661d, type: 3}
+  m_Name: RedAnt
+  m_EditorClassIdentifier: Assembly-CSharp::AntData
+  <id>k__BackingField: 1
+  <life>k__BackingField: 10
+  <speed>k__BackingField: 2.7
+  <force>k__BackingField: 2
+  <work>k__BackingField: 1
+  <sociability>k__BackingField: 5
+  prefab: {fileID: 4232365900651948944, guid: ccc8c1bdfd9b27b44b08cf0da8e8cae1, type: 3}

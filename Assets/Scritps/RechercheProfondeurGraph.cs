@@ -50,7 +50,7 @@ public class RechercheProfondeurGraph : MonoBehaviour
         {
             path.Add(new PathFind());
             path[^1].path.AddRange(dejavue);
-            Debug.Log("Chemin trouvé !");
+            //Debug.Log("Chemin trouvé !");
             return;
         }
     

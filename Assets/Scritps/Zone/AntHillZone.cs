@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AntHillZone : DefaultZone
 {
+    [Header("Zone AntHill")]
+
     public int defaultAnt = 5;
 
     public Sommet antHill;
@@ -21,28 +23,31 @@ public class AntHillZone : DefaultZone
         }
     }
     
-    public override void Work()
+    //TODO POOLING SYSTEM
+    public override float Work()
     {
-        GameObject newAnt = Instantiate(antData.prefab, transform.position, transform.rotation, transform);
+        DefaultIA newAnt = Instantiate(antData.prefab, transform.position, transform.rotation, transform);
         
-        
-        DefaultIA newIA = newAnt.GetComponent<DefaultIA>();
 
-        newIA.home = antHill;
+        newAnt.home = antHill;
         
-        GoSleep(newIA);
+        GoSleep(newAnt);
+        
+        return base.Work();
         
     }
 
     //Regarde si il y a le ration de travailleur ou non
-    bool LookRatioWork()
+    private bool LookRatioWork()
     {
         if(antWorks == null || antWorks.Count == 0) return false;
+        
         if(antWorks.Count/100 >= rationWork) return true;
+        
         return false;
     }
 
-    public void GoSleep(DefaultIA ant)
+    private void GoSleep(DefaultIA ant)
     {
         ant.gameObject.SetActive(false);
         
@@ -52,7 +57,7 @@ public class AntHillZone : DefaultZone
         if(!LookRatioWork()) GoWork(ant);
     }
 
-    public void GoWork(DefaultIA ant)
+    private void GoWork(DefaultIA ant)
     {
         ant.gameObject.SetActive(true);
         

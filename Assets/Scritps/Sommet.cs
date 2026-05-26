@@ -1,9 +1,18 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Sommet : MonoBehaviour
 {
-    public int id;
+    private void Awake()
+    {
+        Debug.Log("Sommet created couco u");  
+    }
+    
+    
+    [HideInInspector] public int id;
     public Edge[] edges;
+    public List<DefaultIA> currentAnts;
     public DefaultZone defaultZone;
     public bool isBloked;
     public GameObject visualBloker;
@@ -51,6 +60,7 @@ public class Sommet : MonoBehaviour
     {
         isBloked = !isBloked;
         visualBloker.SetActive(isBloked);
+        
     }
     
 }
@@ -62,4 +72,6 @@ public class Edge
 {
     public Sommet neighbour;
     [HideInInspector]public float size = 1;
+   
 }
+

@@ -100,6 +100,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -3883476266606673374, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+      propertyPath: TimeWork
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -3883476266606673374, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
       propertyPath: typeZone
       value: 1
       objectReference: {fileID: 0}
@@ -107,6 +111,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 8284592128738373919, guid: e38a27973fe4c174fa3acc12a73e171d, type: 3}
+    - target: {fileID: 4808688844495384593, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4808688844495384593, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
       propertyPath: m_SortingOrder
       value: 11
@@ -164,19 +172,58 @@ PrefabInstance:
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8329730837262568546, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+      propertyPath: defaultZone
+      value: 
+      objectReference: {fileID: 4455623591827373189}
+    - target: {fileID: 8329730837262568546, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
       propertyPath: edges.Array.size
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -3883476266606673374, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5615611706834226213, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4030052950401100891}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5307405500209887352, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4455623591827373189}
   m_SourcePrefab: {fileID: 100100000, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+--- !u!212 &4946273285433893348 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4808688844495384593, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+  m_PrefabInstance: {fileID: 441164053219201525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5472433500423216592 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5615611706834226213, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
   m_PrefabInstance: {fileID: 441164053219201525}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5744593597286295949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5307405500209887352, guid: 145144c470dcbbd49adcdc1df813ef9e, type: 3}
+  m_PrefabInstance: {fileID: 441164053219201525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4455623591827373189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5744593597286295949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2d4dbafcfb89f4797d224c527a2be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FoodZone
+  typeZone: 1
+  TimeWork: 5
+  sprite: {fileID: 4946273285433893348}
+  foodData: {fileID: 11400000, guid: e713ab295f6e04e4692a6960e06b9a89, type: 2}
+  foodDataInstance:
+    id: 0
+    sprite: {fileID: 0}
+    maxFood: 0
+    currentFood: 0

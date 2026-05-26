@@ -20,6 +20,10 @@ public class DefaultIA : MonoBehaviour
     
     [Header("Task")]
     public List<Sommet> tasks;
+
+    [Header("Timer")] 
+    public float currentTime;
+    public float maxTime;
     
     [Header("Information")]
     public AntState currentState = AntState.None;
@@ -40,21 +44,30 @@ public class DefaultIA : MonoBehaviour
         antDataInstance.force *= mutForce;
         transform.localScale *= mutForce;
         
+        antDataInstance.work *= Random.Range(0.7f, 1.3f);
+        
+        antDataInstance.sociability  *=  Random.Range(0.5f, 5f);
     }
 
     void FixedUpdate()
     {
-       if(tasks.Count != 0) Move();
-       else
-       {
-           if(currentSommet == null) return;
+        currentTime += Time.deltaTime;
+        if (currentTime <= (maxTime * antDataInstance.work))
+        {
+            return;
+        }
+        
+        if(tasks.Count != 0) Move();
+        else
+        {
+            if(currentSommet == null) return;
 
-           Sommet random = currentSommet.edges[Random.Range(0, currentSommet.edges.Length)].neighbour;
+            Sommet random = currentSommet.edges[Random.Range(0, currentSommet.edges.Length)].neighbour;
 
-           if (random.isBloked) return;
+            if (random.isBloked) return;
            
-           tasks.Add(random);
-       }
+            tasks.Add(random);
+        }
     }
 
     void Move()
@@ -87,7 +100,25 @@ public class DefaultIA : MonoBehaviour
             currentSommet = col.GetComponent<Sommet>();
             Explore(currentSommet);
             
+            currentSommet.currentAnts.Add(this);
+            
+            DefaultIA enemy = LocateEnemy(currentSommet.currentAnts);
+            if (enemy) Attack(enemy);
+            
+            DefaultIA friend = LocateFriend(currentSommet.currentAnts);
+            if (friend && goal) Manipulation(goal, this);
+            
             if(!lastSommet) lastSommet = currentSommet;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Sommet"))
+        {
+            currentSommet = col.GetComponent<Sommet>();
+            
+            currentSommet.currentAnts.Remove(this);
         }
     }
 
@@ -95,8 +126,9 @@ public class DefaultIA : MonoBehaviour
     {
         TypeZone typeZone = sommet.defaultZone.FindTypeZone();
 
-        if (typeZone == TypeZone.Void)
+        if (typeZone == TypeZone.Void && goal)
         {
+            if( sommet.id == goal.id) goal = null;
             
         }
         else if (typeZone == TypeZone.Food)
@@ -109,15 +141,20 @@ public class DefaultIA : MonoBehaviour
         {
             TakeEat(false, sommet);
         }
-        
-        
     }
 
     void TakeEat(bool isTake, Sommet sommet)
     {
         if (isTake)
         {
-            sheet.SetActive(true);
+
+            if (!sheet.activeSelf)
+            {
+                maxTime = sommet.defaultZone.Work();
+                sheet.SetActive(true);
+                Debug.Log(maxTime);
+                currentTime = 0;
+            }
 
             if (home)
             {
@@ -135,10 +172,11 @@ public class DefaultIA : MonoBehaviour
         {
             if (sheet.activeSelf)
             {
-                sommet.defaultZone.Work();
+                maxTime = sommet.defaultZone.Work();
+                sheet.SetActive(false);
+                currentTime = 0;
             }
             
-            sheet.SetActive(false);
 
             if (goal)
             {
@@ -150,6 +188,67 @@ public class DefaultIA : MonoBehaviour
                 }
             }
         }
+    }
+
+    DefaultIA LocateEnemy(List<DefaultIA> ants)
+    {
+        foreach (DefaultIA ant in ants)
+        {
+            if (ant.antDataInstance.id != antDataInstance.id)
+            {
+                return ant;
+            }
+        }
+        return null;
+    }
+    DefaultIA LocateFriend(List<DefaultIA> ants)
+    {
+        foreach (DefaultIA ant in ants)
+        {
+            if (ant.antDataInstance.id == antDataInstance.id)
+            {
+                return ant;
+            }
+        }
+        return null;
+    }
+
+
+    //Attaque une fourmis
+    void Attack(DefaultIA ant)
+    {
+        maxTime = 1;
+        currentTime = 0;
+        
+        ant.TakeDamage(antDataInstance.force, this);
+    }
+    
+    //PRendre des dégat
+    void TakeDamage(float damage,  DefaultIA enemy)
+    {
+        antDataInstance.life -= damage;
+        if (antDataInstance.life <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        //Riposte
+        Attack(enemy);
+    }
+
+    void Manipulation(Sommet target, DefaultIA friend)
+    {
+        if (friend.antDataInstance.sociability >= antDataInstance.sociability)
+        {
+            Debug.Log("Manipulation");
+            goal = target;
+        }
+    }
+    
+    float DistanceToCible(Transform cible)
+    {
+        return Vector2.Distance(transform.position, cible.transform.position);
     }
 }
 public enum AntState
