@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e73f41823a8f17498134ab9d4538fc0, type: 3}
+  m_Name: QueenData
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetifData
+  <id>k__BackingField: 1
+  <elementSprite>k__BackingField: {fileID: 21300000, guid: 25833ee3c3ba18d48bdefaae084fc7b1, type: 3}
+  <finalElementSprite>k__BackingField: {fileID: 0}
+  <targetSprite>k__BackingField: {fileID: 6979369875176246629, guid: 6affab25bbb6ebb4bb56898e3c00f06c, type: 3}
+  <currenQuantity>k__BackingField: 0
+  <maxQuantity>k__BackingField: 2147483647
+  <collectible>k__BackingField: {fileID: 11400000, guid: e713ab295f6e04e4692a6960e06b9a89, type: 2}
+  <type>k__BackingField: 2
+  <home>k__BackingField: {fileID: 11400000}
+  <action>k__BackingField: {fileID: 11400000, guid: cede86f033a44d0439f22c65526d24c1, type: 2}

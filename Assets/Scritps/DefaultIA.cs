@@ -7,6 +7,7 @@ public class DefaultIA : MonoBehaviour
     public AntData antData;
     public AntDataInstance antDataInstance;
     public Rigidbody2D rb;
+    public SpriteRenderer spriteRenderer;
 
     [Header("Objetif")] 
     public Sommet lastSommet;
@@ -15,8 +16,7 @@ public class DefaultIA : MonoBehaviour
     public Sommet goal;
 
     [Header("Visual")] 
-    public GameObject sheet;
-    
+    public SpriteRenderer sheet;
     
     [Header("Task")]
     public List<Sommet> tasks;
@@ -25,12 +25,10 @@ public class DefaultIA : MonoBehaviour
     public float currentTime;
     public float maxTime;
     
-    [Header("Information")]
-    public AntState currentState = AntState.None;
     void OnEnable()
     {
         tasks = new List<Sommet>();
-        sheet.SetActive(false);
+        sheet.gameObject.SetActive(false);
         antDataInstance = new AntDataInstance(antData);
         
         //Variation Génétique
@@ -75,15 +73,16 @@ public class DefaultIA : MonoBehaviour
         if(tasks[0].isBloked) tasks[0] = lastSommet;
         
         Vector3 cible = tasks[0].transform.position;
+        spriteRenderer.sortingOrder = tasks[0].defaultZone.spriteRenderer.sortingOrder + 2;
+        sheet.sortingOrder =  spriteRenderer.sortingOrder - 1;
         if (transform.position == tasks[0].transform.position)
         {
             tasks.RemoveAt(0);
         }
         else
         {
-            currentState = AntState.Lost;
             Vector2 direction = new Vector2();
-            if (!sheet.activeSelf) direction = Vector2.MoveTowards(rb.position, cible, antDataInstance.speed * Time.deltaTime) ;
+            if (!sheet.gameObject.activeSelf) direction = Vector2.MoveTowards(rb.position, cible, antDataInstance.speed * Time.deltaTime) ;
             else direction = Vector2.MoveTowards(rb.position, cible, (antDataInstance.speed/1.5f) * Time.deltaTime) ;
 
 
@@ -106,7 +105,7 @@ public class DefaultIA : MonoBehaviour
             if (enemy) Attack(enemy);
             
             DefaultIA friend = LocateFriend(currentSommet.currentAnts);
-            if (friend && goal) Manipulation(goal, this);
+            //if (friend && goal) Manipulation(goal, this);
             
             if(!lastSommet) lastSommet = currentSommet;
         }
@@ -119,27 +118,27 @@ public class DefaultIA : MonoBehaviour
             currentSommet = col.GetComponent<Sommet>();
             
             currentSommet.currentAnts.Remove(this);
+            
         }
     }
 
     void Explore(Sommet sommet)
     {
-        TypeZone typeZone = sommet.defaultZone.FindTypeZone();
+        if(sommet.defaultZone.objetif == null || !goal) return;
 
-        if (typeZone == TypeZone.Void && goal)
+        //Goal
+        if (sommet.id == goal.id)
         {
-            if( sommet.id == goal.id) goal = null;
-            
-        }
-        else if (typeZone == TypeZone.Food)
-        {
+            if(!sommet.defaultZone.ChangeObjetif(-1, sommet)) return;
             TakeEat(true, sommet);
-            goal = sommet;
-            
+            goal = null;
+            FindSommet(currentSommet, home);
         }
-        else if (typeZone == TypeZone.AntHill)
+        if (sommet.id == home.id && !goal)
         {
+            if(!sommet.defaultZone.ChangeObjetif(1, sommet)) return;
             TakeEat(false, sommet);
+            home = null;
         }
     }
 
@@ -147,46 +146,31 @@ public class DefaultIA : MonoBehaviour
     {
         if (isTake)
         {
-
-            if (!sheet.activeSelf)
+            if (!sheet.gameObject.activeSelf)
             {
                 maxTime = sommet.defaultZone.Work();
-                sheet.SetActive(true);
-                Debug.Log(maxTime);
+                sheet.gameObject.SetActive(true);
+                sheet.sprite = sommet.defaultZone.objetif.collectible.sprite;
                 currentTime = 0;
-            }
-
-            if (home)
-            {
-                
-                List<Sommet> result = RechercheProfondeurGraph.instance.BestPath(currentSommet, home);
-                if (result != null)
-                {
-                    tasks.AddRange(result);
-                    currentState = AntState.GoHome;
-                }
-                
             }
         }
         else
         {
-            if (sheet.activeSelf)
+            if (sheet.gameObject.activeSelf)
             {
                 maxTime = sommet.defaultZone.Work();
-                sheet.SetActive(false);
+                sheet.gameObject.SetActive(false);
                 currentTime = 0;
             }
-            
+        }
+    }
 
-            if (goal)
-            {
-                List<Sommet> result = RechercheProfondeurGraph.instance.BestPath(currentSommet, goal);
-                if (result != null)
-                {
-                    tasks.AddRange(result);
-                    currentState = AntState.GoGoal;
-                }
-            }
+    public void FindSommet(Sommet start, Sommet end)
+    {
+        List<Sommet> result = RechercheProfondeurGraph.instance.BestPath(start, end);
+        if (result != null)
+        {
+            tasks.AddRange(result);
         }
     }
 
@@ -236,25 +220,9 @@ public class DefaultIA : MonoBehaviour
         //Riposte
         Attack(enemy);
     }
-
-    void Manipulation(Sommet target, DefaultIA friend)
-    {
-        if (friend.antDataInstance.sociability >= antDataInstance.sociability)
-        {
-            Debug.Log("Manipulation");
-            goal = target;
-        }
-    }
     
     float DistanceToCible(Transform cible)
     {
         return Vector2.Distance(transform.position, cible.transform.position);
     }
-}
-public enum AntState
-{
-    None,
-    Lost,
-    GoHome,
-    GoGoal
 }

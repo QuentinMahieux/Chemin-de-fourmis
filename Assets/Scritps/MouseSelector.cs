@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MouseSelector : MonoBehaviour
 {
-    public bool isFull;
+    public ObjetifData objetifTarget;
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -17,16 +17,7 @@ public class MouseSelector : MonoBehaviour
 
                 if (sommet != null)
                 {
-                    if (sommet.isBloked && !isFull)
-                    {
-                        sommet.TallClutter();
-                        isFull = true;
-                    }
-                    else if (!sommet.isBloked && isFull)
-                    {
-                        sommet.TallClutter();
-                        isFull = false;
-                    }
+                    sommet.defaultZone.SetObjetif(objetifTarget.Instance());
                 }
             }
         }

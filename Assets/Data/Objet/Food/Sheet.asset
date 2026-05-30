@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3037252ad0b0e74ab830bc4569519ea, type: 3}
   m_Name: Sheet
   m_EditorClassIdentifier: Assembly-CSharp::FoodData
-  <id>k__BackingField: 0
-  <sprite>k__BackingField: {fileID: 8011277332404630629, guid: f1edf603e523d7b469eec7551ced31e9, type: 3}
-  <maxFood>k__BackingField: 10
-  <currentFood>k__BackingField: 0
+  id: 0
+  sprite: {fileID: 8011277332404630629, guid: f1edf603e523d7b469eec7551ced31e9, type: 3}

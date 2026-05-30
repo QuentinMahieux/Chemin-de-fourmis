@@ -31,10 +31,14 @@ public class RechercheProfondeurGraph : MonoBehaviour
             id++;
         }
     }
-    
-    void Start()
+
+    public Sommet FindSommet(string id)
     {
-        
+        foreach (Sommet sommet in graph)
+        {
+            if (sommet.defaultZone.objetif.id == id) return sommet;
+        }
+        return null;
     }
     
     void PathFinding(Sommet s, Sommet end, List<Sommet> dejavue, List<PathFind> path)

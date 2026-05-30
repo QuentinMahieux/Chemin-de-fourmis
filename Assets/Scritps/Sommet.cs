@@ -15,7 +15,7 @@ public class Sommet : MonoBehaviour
     public List<DefaultIA> currentAnts;
     public DefaultZone defaultZone;
     public bool isBloked;
-    public GameObject visualBloker;
+    //public GameObject visualBloker;
     
     void OnDrawGizmos()
     {
@@ -25,14 +25,13 @@ public class Sommet : MonoBehaviour
             if (MutualNeighbor(edge.neighbour)) Gizmos.color = Color.darkRed;
             else Gizmos.color = Color.darkBlue;
             
-            if (!edge.neighbour) return;
+            if (!edge.neighbour) break;
             Gizmos.DrawLine(transform.position, edge.neighbour.transform.position);
         }
     }
 
     void Start()
     {
-        visualBloker.SetActive(isBloked);
         foreach (Edge e in edges)
         {
             e.size = DistanceToNeighbour(e.neighbour.transform);
@@ -55,13 +54,7 @@ public class Sommet : MonoBehaviour
         }
         return false;
     }
-
-    public void TallClutter()
-    {
-        isBloked = !isBloked;
-        visualBloker.SetActive(isBloked);
-        
-    }
+    
     
 }
 

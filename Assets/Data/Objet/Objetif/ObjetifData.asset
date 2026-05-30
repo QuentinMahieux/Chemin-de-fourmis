@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e73f41823a8f17498134ab9d4538fc0, type: 3}
+  m_Name: ObjetifData
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetifData
+  <id>k__BackingField: 0
+  <elementSprite>k__BackingField: {fileID: 8284592128738373919, guid: e38a27973fe4c174fa3acc12a73e171d, type: 3}
+  <finalElementSprite>k__BackingField: {fileID: 21300000, guid: 2a9ef1dd6b4179d4581c3b7a4b9073c1, type: 3}
+  <targetSprite>k__BackingField: {fileID: -23201563213342612, guid: f43d8609986cf2241a42619f46a2a889, type: 3}
+  <currenQuantity>k__BackingField: 5
+  <maxQuantity>k__BackingField: 5
+  <collectible>k__BackingField: {fileID: 11400000, guid: e713ab295f6e04e4692a6960e06b9a89, type: 2}
+  <type>k__BackingField: 1
+  <home>k__BackingField: {fileID: 11400000, guid: d407fb0590f779f4c8775225d9125e85, type: 2}
+  <action>k__BackingField: {fileID: 11400000, guid: bb227aedbde89d04ebad7e8b7d6540eb, type: 2}

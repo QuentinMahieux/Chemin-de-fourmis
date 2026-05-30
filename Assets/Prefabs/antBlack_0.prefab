@@ -109,19 +109,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultIA
   antData: {fileID: 11400000, guid: 8cc6f0bce227638429f02765928cf09d, type: 2}
   antDataInstance:
+    id: 0
     life: 0
     speed: 0
     force: 0
     work: 0
     sociability: 0
   rb: {fileID: 3705999581476227816}
+  spriteRenderer: {fileID: 155995048698744633}
   lastSommet: {fileID: 0}
   currentSommet: {fileID: 0}
   home: {fileID: 0}
   goal: {fileID: 0}
-  sheet: {fileID: 5504543390935000610}
+  sheet: {fileID: 5874308058755450538}
   tasks: []
-  currentState: 0
+  currentTime: 0
+  maxTime: 0
 --- !u!50 &3705999581476227816
 Rigidbody2D:
   serializedVersion: 5
@@ -206,7 +209,7 @@ GameObject:
   - component: {fileID: 5849020517088310995}
   - component: {fileID: 5874308058755450538}
   m_Layer: 0
-  m_Name: feuille_0
+  m_Name: collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
