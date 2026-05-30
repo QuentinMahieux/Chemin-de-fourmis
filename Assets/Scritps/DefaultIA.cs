@@ -124,22 +124,28 @@ public class DefaultIA : MonoBehaviour
 
     void Explore(Sommet sommet)
     {
-        if(sommet.defaultZone.objetif == null || !goal) return;
+        if(sommet.defaultZone.objetif == null) return;
 
-        //Goal
-        if (sommet.id == goal.id)
+        if (goal)
         {
-            if(!sommet.defaultZone.ChangeObjetif(-1, sommet)) return;
-            TakeEat(true, sommet);
-            goal = null;
-            FindSommet(currentSommet, home);
+            if (sommet.id == goal.id)
+            {
+                goal = null;
+                if(!sommet.defaultZone.ChangeObjetif(-1, sommet)) return;
+                TakeEat(true, sommet);
+                FindSommet(currentSommet, home);
+            }
         }
-        if (sommet.id == home.id && !goal)
+        if (home)
         {
-            if(!sommet.defaultZone.ChangeObjetif(1, sommet)) return;
-            TakeEat(false, sommet);
-            home = null;
+            if (sommet.id == home.id && goal == null)
+            {
+                home = null;
+                if(!sommet.defaultZone.ChangeObjetif(1, sommet)) return;
+                TakeEat(false, sommet);
+            }
         }
+       
     }
 
     void TakeEat(bool isTake, Sommet sommet)

@@ -16,7 +16,6 @@ public class ObjetifData : ScriptableObject
     [field: SerializeField] public FoodData collectible { get; private set; }
 
 
-    [field: SerializeField] public ObjetifType type { get; private set; }
     [field: SerializeField] public ObjetifData home { get; private set; }
     [field: SerializeReference] public DefaultAction action { get; private set; }
 
@@ -43,7 +42,6 @@ public class ObjetifDataInstance
     public int currenQuantity;
     public int maxQuantity;
     public FoodData collectible;
-    public ObjetifType type;
     public ObjetifData home;
     public DefaultAction action;
     
@@ -57,16 +55,8 @@ public class ObjetifDataInstance
         currenQuantity = data.currenQuantity;
         maxQuantity = data.maxQuantity;
         collectible = data.collectible;
-        type = data.type;
         home = data.home;
         action = data.action;
         
     }
-}
-
-public enum ObjetifType
-{
-    None,
-    Collect,
-    Build
 }

@@ -39,21 +39,13 @@ public class DefaultZone : MonoBehaviour
 
     public void SetObjetif(ObjetifDataInstance newObjetif)
     {
-        if (objetif.type == ObjetifType.None)
+        if (objetif != null)
         {
-            if (newObjetif.type == ObjetifType.Build)
-            {
-                objetif = newObjetif;
-                
-                targetSpriteRenderer.gameObject.SetActive(true);
-                targetSpriteRenderer.sprite = objetif.targetSprite;
-            }
-        }
-        if (objetif.type == ObjetifType.Collect)
-        {
+            if(!objetif.home) return;
             if(!ChangeObjetif(0, currentSommet)) return;
 
             Sommet home = RechercheProfondeurGraph.instance.FindSommet(objetif.home.id);
+            
             if(!home) return;
             
             if(!LevelManager.instance.ManipuleAnt(currentSommet, home)) return;
@@ -79,11 +71,7 @@ public class DefaultZone : MonoBehaviour
 
         if(objetif.action) objetif.action.Action(sommet);
         
-        if (objetif.type == ObjetifType.Collect && objetif.currenQuantity > 0)
-        {
-            return true;
-        }
-        else if (objetif.type == ObjetifType.Build && objetif.currenQuantity < objetif.maxQuantity)
+        if (objetif.currenQuantity >= 0 && objetif.currenQuantity <= objetif.maxQuantity)
         {
             return true;
         }

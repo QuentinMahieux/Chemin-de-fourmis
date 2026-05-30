@@ -32,13 +32,16 @@ public class LevelManager : MonoBehaviour
 
     public bool ManipuleAnt(Sommet goal, Sommet home)
     {
+        Debug.Log("Start Manipulation");
         foreach (DefaultIA ant in ants)
         {
-            if (!ant.goal)
+            if (!ant.goal && !ant.home)
             {
                 ant.goal = goal;
                 ant.home = home;
                 ant.FindSommet(ant.currentSommet, ant.goal);
+                Debug.Log("Finish Manipulation");
+
                 return true;
             }
         }

@@ -7,6 +7,8 @@ public class ButtonManager : MonoBehaviour
    
    public void ObjetifNewAnt()
    {
-     // goat = 
+      Sommet goal = RechercheProfondeurGraph.instance.FindSommet(reserveSheet.id);
+      Sommet home = RechercheProfondeurGraph.instance.FindSommet(queen.id);
+      if (goal && home) LevelManager.instance.ManipuleAnt(goal, home);
    }
 }
