@@ -13,7 +13,10 @@ public class DefaultIA : MonoBehaviour
     public Sommet lastSommet;
     public Sommet currentSommet;
     public Sommet home;
+    public string homeID;
     public Sommet goal;
+    public string goalID;
+    private Sommet lastGoal;
 
     [Header("Visual")] 
     public SpriteRenderer sheet;
@@ -99,12 +102,6 @@ public class DefaultIA : MonoBehaviour
             currentSommet = col.GetComponent<Sommet>();
             Explore(currentSommet);
             
-            currentSommet.currentAnts.Add(this);
-            
-            DefaultIA enemy = LocateEnemy(currentSommet.currentAnts);
-            if (enemy) Attack(enemy);
-            
-            DefaultIA friend = LocateFriend(currentSommet.currentAnts);
             //if (friend && goal) Manipulation(goal, this);
             
             if(!lastSommet) lastSommet = currentSommet;
@@ -116,9 +113,6 @@ public class DefaultIA : MonoBehaviour
         if (col.CompareTag("Sommet"))
         {
             currentSommet = col.GetComponent<Sommet>();
-            
-            currentSommet.currentAnts.Remove(this);
-            
         }
     }
 
@@ -126,49 +120,79 @@ public class DefaultIA : MonoBehaviour
     {
         if(sommet.defaultZone.objetif == null) return;
 
+        
         if (goal)
         {
-            if (sommet.id == goal.id)
+            if (sommet.id == goal.id && goal.defaultZone.objetif.id == goalID)
             {
+                int effectiveQuantity = home.defaultZone.objetif.currenQuantity + home.defaultZone.antsInTransit;
+                if (home.defaultZone.objetif.maxQuantity <= effectiveQuantity || home.defaultZone.objetif.id != homeID)
+                {
+                    ResetObjetif();
+                    return;
+                }
+
+                lastGoal = goal;
                 goal = null;
-                if(!sommet.defaultZone.ChangeObjetif(-1, sommet)) return;
-                TakeEat(true, sommet);
+
+                if(!sommet.defaultZone.ChangeObjetif(-1, sommet, true))
+                {
+                    lastGoal = null;
+                    home = null;
+                    return;
+                }
+
+                TakeEat(sommet);
+                home.defaultZone.antsInTransit++;
                 FindSommet(currentSommet, home);
             }
         }
         if (home)
         {
-            if (sommet.id == home.id && goal == null)
+            if (sommet.id == home.id && goal == null && home.defaultZone.objetif.id == homeID)
             {
-                home = null;
-                if(!sommet.defaultZone.ChangeObjetif(1, sommet)) return;
-                TakeEat(false, sommet);
+                int effectiveQuantity = home.defaultZone.objetif.currenQuantity + home.defaultZone.antsInTransit - 1;
+                if (home.defaultZone.objetif.maxQuantity <= effectiveQuantity) return;
+                
+                if(!sommet.defaultZone.ChangeObjetif(1, sommet,true)) return;
+                home.defaultZone.antsInTransit--;
+                
+                
+                TakeEat(sommet);
+                if (lastGoal.defaultZone.CanChangeObjetif(-1))
+                {
+                    goal = lastGoal;
+                    lastGoal = null;
+                    FindSommet(currentSommet, goal);
+                }
+                else
+                {
+                    home.defaultZone.AntRemver(this);
+                    
+                    lastGoal = null;
+                    goal = null;
+                    home = null;
+                }
             }
         }
-       
     }
 
-    void TakeEat(bool isTake, Sommet sommet)
+    void TakeEat(Sommet sommet)
     {
-        if (isTake)
+        if (!sheet.gameObject.activeSelf)
         {
-            if (!sheet.gameObject.activeSelf)
-            {
-                maxTime = sommet.defaultZone.Work();
-                sheet.gameObject.SetActive(true);
-                sheet.sprite = sommet.defaultZone.objetif.collectible.sprite;
-                currentTime = 0;
-            }
+            maxTime = sommet.defaultZone.Work();
+            sheet.gameObject.SetActive(true);
+            sheet.sprite = sommet.defaultZone.objetif.collectible.sprite;
+            currentTime = 0;
         }
         else
         {
-            if (sheet.gameObject.activeSelf)
-            {
-                maxTime = sommet.defaultZone.Work();
-                sheet.gameObject.SetActive(false);
-                currentTime = 0;
-            }
+            maxTime = sommet.defaultZone.Work();
+            sheet.gameObject.SetActive(false);
+            currentTime = 0;
         }
+        
     }
 
     public void FindSommet(Sommet start, Sommet end)
@@ -191,18 +215,20 @@ public class DefaultIA : MonoBehaviour
         }
         return null;
     }
-    DefaultIA LocateFriend(List<DefaultIA> ants)
-    {
-        foreach (DefaultIA ant in ants)
-        {
-            if (ant.antDataInstance.id == antDataInstance.id)
-            {
-                return ant;
-            }
-        }
-        return null;
-    }
 
+    public void ResetObjetif()
+    {
+        if(sheet.gameObject.activeSelf) TakeEat(goal);
+        
+        home.defaultZone.AntRemver(this);
+        
+        if(home.defaultZone.currentAnts.Count <= 0) home.defaultZone.targetSpriteRenderer.gameObject.SetActive(false);
+        
+        lastGoal = null;
+        goal = null;
+        home = null;
+        
+    }
 
     //Attaque une fourmis
     void Attack(DefaultIA ant)

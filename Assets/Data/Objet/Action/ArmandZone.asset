@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ab13f5fe8b47446b70b38d949412f8, type: 3}
+  m_Name: ArmandZone
+  m_EditorClassIdentifier: Assembly-CSharp::ArmandZone
+  animatorController: {fileID: 9100000, guid: 97ff597ffaf3c5e4c91d7645ce7cc3e6, type: 2}

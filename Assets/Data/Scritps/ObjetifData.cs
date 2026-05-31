@@ -15,9 +15,12 @@ public class ObjetifData : ScriptableObject
     [field: SerializeField] public int maxQuantity { get; private set; }
     [field: SerializeField] public FoodData collectible { get; private set; }
 
-
+    [field: SerializeField] public bool isGoal { get; private set; }
     [field: SerializeField] public ObjetifData home { get; private set; }
     [field: SerializeReference] public DefaultAction action { get; private set; }
+    [field: SerializeReference] public float actionTimer { get; private set; }
+
+
 
 
     public void Reset()
@@ -43,7 +46,9 @@ public class ObjetifDataInstance
     public int maxQuantity;
     public FoodData collectible;
     public ObjetifData home;
+    public bool isGoal;
     public DefaultAction action;
+    public float actionTimer;
     
 
     public ObjetifDataInstance(ObjetifData data)
@@ -56,7 +61,8 @@ public class ObjetifDataInstance
         maxQuantity = data.maxQuantity;
         collectible = data.collectible;
         home = data.home;
+        isGoal = data.isGoal;
         action = data.action;
-        
+        actionTimer = data.actionTimer;
     }
 }

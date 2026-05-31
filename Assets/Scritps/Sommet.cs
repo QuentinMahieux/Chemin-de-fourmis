@@ -12,7 +12,6 @@ public class Sommet : MonoBehaviour
     
     [HideInInspector] public int id;
     public Edge[] edges;
-    public List<DefaultIA> currentAnts;
     public DefaultZone defaultZone;
     public bool isBloked;
     //public GameObject visualBloker;

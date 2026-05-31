@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AntData
   <id>k__BackingField: 0
   <life>k__BackingField: 10
-  <speed>k__BackingField: 2.7
+  <speed>k__BackingField: 6.25
   <force>k__BackingField: 2
   <work>k__BackingField: 1
   <sociability>k__BackingField: 5

@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
         ants.Add(ant);
     }
 
-    public bool ManipuleAnt(Sommet goal, Sommet home)
+    public DefaultIA ManipuleAnt(Sommet goal, Sommet home)
     {
         Debug.Log("Start Manipulation");
         foreach (DefaultIA ant in ants)
@@ -38,14 +38,16 @@ public class LevelManager : MonoBehaviour
             if (!ant.goal && !ant.home)
             {
                 ant.goal = goal;
+                ant.goalID = goal.defaultZone.objetif.id;
                 ant.home = home;
-                ant.FindSommet(ant.currentSommet, ant.goal);
-                Debug.Log("Finish Manipulation");
+                ant.homeID = home.defaultZone.objetif.id;
 
-                return true;
+                ant.FindSommet(ant.currentSommet, ant.goal);
+
+                return ant;
             }
         }
-        return false;
+        return null;
     }
 
     public void RemoveAnt(DefaultIA ant)

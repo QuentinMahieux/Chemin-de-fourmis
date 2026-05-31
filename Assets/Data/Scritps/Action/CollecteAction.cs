@@ -6,8 +6,13 @@ public class CollecteAction : DefaultAction
 {
     public override void Action(Sommet sommet)
     {
-        if(sommet.defaultZone.objetif.currenQuantity > 0) return;
-
-        sommet.defaultZone.elementSpriteRenderer.sprite = sommet.defaultZone.objetif.finalElementSprite;
+        if(sommet.defaultZone.objetif.currenQuantity > 0)
+        {
+            sommet.defaultZone.elementSpriteRenderer.sprite = sommet.defaultZone.objetif.elementSprite;
+        }
+        else
+        {
+            sommet.defaultZone.elementSpriteRenderer.sprite = sommet.defaultZone.objetif.finalElementSprite;
+        }
     }
 }

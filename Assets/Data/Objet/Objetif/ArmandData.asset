@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e73f41823a8f17498134ab9d4538fc0, type: 3}
-  m_Name: NoneObjetifData
+  m_Name: ArmandData
   m_EditorClassIdentifier: Assembly-CSharp::ObjetifData
-  <id>k__BackingField: 0
-  <elementSprite>k__BackingField: {fileID: -3834187785773516146, guid: d20eaab0a772fde4e9e06c1cd0838a8e, type: 3}
+  <id>k__BackingField: 0ac3b787-ffff-49f4-bf34-51d8a1d8b8ab
+  <elementSprite>k__BackingField: {fileID: 21300000, guid: b95ba1e24c85f2041b7feb9051576324, type: 3}
   <finalElementSprite>k__BackingField: {fileID: 0}
   <targetSprite>k__BackingField: {fileID: 0}
   <currenQuantity>k__BackingField: 0
-  <maxQuantity>k__BackingField: 0
-  <collectible>k__BackingField: {fileID: 0}
-  <isGoal>k__BackingField: 0
+  <maxQuantity>k__BackingField: 2147483647
+  <collectible>k__BackingField: {fileID: 11400000, guid: e8d80f325e1cf5c43a49fa85de01db2e, type: 2}
   <home>k__BackingField: {fileID: 0}
-  <action>k__BackingField: {fileID: 0}
-  <actionTimer>k__BackingField: 0
+  <action>k__BackingField: {fileID: 11400000, guid: fce30947b42ca5246a08612ae79813b0, type: 2}
+  <actionTimer>k__BackingField: 0.5
