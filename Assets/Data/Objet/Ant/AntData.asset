@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AntData
   <id>k__BackingField: 0
   <life>k__BackingField: 10
-  <speed>k__BackingField: 6.25
+  <speed>k__BackingField: 4
   <force>k__BackingField: 2
   <work>k__BackingField: 1
-  <sociability>k__BackingField: 5
+  <level>k__BackingField: 0
   prefab: {fileID: 7430406194502739258, guid: 28c2ad98c550a6d439a749da4f706f44, type: 3}

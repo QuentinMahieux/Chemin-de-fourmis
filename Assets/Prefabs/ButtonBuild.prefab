@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 6101234262421443467}
   - component: {fileID: 12043700734636805}
   - component: {fileID: 1418803395867565341}
+  - component: {fileID: 4779680925681884202}
   m_Layer: 5
   m_Name: ButtonBuild
   m_TagString: Untagged
@@ -258,15 +259,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BuildInterface, Assembly-CSharp
-        m_MethodName: CreateNewObjetif
-        m_Mode: 2
+      - m_Target: {fileID: 4779680925681884202}
+        m_TargetAssemblyTypeName: BuildSlot, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: ObjetifData, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4779680925681884202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988095819263572817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af64dc5dbe921441bc02141c743f997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuildSlot
+  data: {fileID: 0}
+  image: {fileID: 12043700734636805}
+  text: {fileID: 5622726300352301752}

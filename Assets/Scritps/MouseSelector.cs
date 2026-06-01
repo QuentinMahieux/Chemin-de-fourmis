@@ -4,6 +4,7 @@ public class MouseSelector : MonoBehaviour
 {
     public ObjetifData objetifTarget;
     public BuildInterface buildInterface;
+    public PopUpSommet popUpSommet;
     
     void Update()
     {
@@ -42,6 +43,36 @@ public class MouseSelector : MonoBehaviour
             {
                 OpenInterface(false);
             }
+            
+            if (hit.collider != null && hit.collider.CompareTag("Armand"))
+            {
+                Armand armand = hit.collider.GetComponent<Armand>();
+
+                if (armand != null)
+                {
+                    Debug.unityLogger.Log("Hit");
+                    armand.OpenShop();
+                }
+            }
+        }
+        
+        Vector2 _worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        RaycastHit2D _hit = Physics2D.Raycast(_worldPos, Vector2.zero);
+
+        if (_hit.collider != null && _hit.collider.CompareTag("Sommet"))
+        {
+            Sommet sommet = _hit.collider.GetComponent<Sommet>();
+
+            if (sommet != null &&  sommet.defaultZone.objetif.id != "0")
+            {
+                popUpSommet.Affiche(true, sommet.defaultZone.objetif);
+            }
+            else popUpSommet.Affiche(false);
+        }
+        else
+        {
+            popUpSommet.Affiche(false);
         }
     }
     
@@ -56,6 +87,8 @@ public class MouseSelector : MonoBehaviour
             buildInterface.gameObject.SetActive(true);
             
             buildInterface.sommet = sommet;
+
+            buildInterface.Refresh();
         }
         else
         {

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e73f41823a8f17498134ab9d4538fc0, type: 3}
+  m_Name: RocheZincObjetif
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetifData
+  <id>k__BackingField: 9697009d-fec1-4cb6-9502-3e2b2d3386e0
+  <elementSprite>k__BackingField: {fileID: 21300000, guid: d5c7b9fd44873424b9e4f9edadee1292, type: 3}
+  <targetSprite>k__BackingField: {fileID: -23201563213342612, guid: f43d8609986cf2241a42619f46a2a889, type: 3}
+  <currenQuantity>k__BackingField: 5
+  <maxQuantity>k__BackingField: 5
+  <collectible>k__BackingField: {fileID: 11400000, guid: e9d2872c58b121d4a918f7125a88dc2b, type: 2}
+  <isGoal>k__BackingField: 1
+  <home>k__BackingField: {fileID: 11400000, guid: 201ba241d916eb743a55762d4980ffe7, type: 2}
+  <action>k__BackingField: {fileID: 11400000, guid: 199785f825b8fcc4f81f50bcd6d66799, type: 2}
+  <actionTimer>k__BackingField: 0
+  <level>k__BackingField: 1

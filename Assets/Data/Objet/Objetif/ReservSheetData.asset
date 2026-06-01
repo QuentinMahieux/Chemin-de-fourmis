@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e73f41823a8f17498134ab9d4538fc0, type: 3}
+  m_Name: ReservSheetData
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetifData
+  <id>k__BackingField: 3a27aa80-635e-4d4a-abc7-1276827eb5f1
+  <elementSprite>k__BackingField: {fileID: 639035205556016577, guid: ce8c6cf8eac93b340b9513b6fd673f62, type: 3}
+  <finalElementSprite>k__BackingField: {fileID: 0}
+  <targetSprite>k__BackingField: {fileID: 6979369875176246629, guid: 6affab25bbb6ebb4bb56898e3c00f06c, type: 3}
+  <currenQuantity>k__BackingField: 5
+  <maxQuantity>k__BackingField: 2147483647
+  <collectible>k__BackingField: {fileID: 11400000, guid: e713ab295f6e04e4692a6960e06b9a89, type: 2}
+  <isGoal>k__BackingField: 0
+  <home>k__BackingField: {fileID: 0}
+  <action>k__BackingField: {fileID: 0}
+  <actionTimer>k__BackingField: 0

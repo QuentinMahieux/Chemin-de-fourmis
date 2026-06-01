@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: CarteMereObjetifData
   m_EditorClassIdentifier: Assembly-CSharp::ObjetifData
   <id>k__BackingField: 5cb1e3b4-b804-43e6-88fc-1d0fa114824e
+  <name>k__BackingField: 
   <elementSprite>k__BackingField: {fileID: 21300000, guid: d0a4b1cb7b902d340aab111923d23afe, type: 3}
-  <finalElementSprite>k__BackingField: {fileID: 0}
   <targetSprite>k__BackingField: {fileID: -23201563213342612, guid: f43d8609986cf2241a42619f46a2a889, type: 3}
-  <currenQuantity>k__BackingField: 3
-  <maxQuantity>k__BackingField: 3
+  <currenQuantity>k__BackingField: 5
+  <maxQuantity>k__BackingField: 5
   <collectible>k__BackingField: {fileID: 11400000, guid: e8d80f325e1cf5c43a49fa85de01db2e, type: 2}
   <isGoal>k__BackingField: 1
   <home>k__BackingField: {fileID: 11400000, guid: 2356c379e73b8e14a8a371c16e0c95f2, type: 2}
   <action>k__BackingField: {fileID: 0}
   <actionTimer>k__BackingField: 0
+  <level>k__BackingField: 0

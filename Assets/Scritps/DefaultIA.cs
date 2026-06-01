@@ -46,8 +46,6 @@ public class DefaultIA : MonoBehaviour
         transform.localScale *= mutForce;
         
         antDataInstance.work *= Random.Range(0.7f, 1.3f);
-        
-        antDataInstance.sociability  *=  Random.Range(0.5f, 5f);
     }
 
     void FixedUpdate()
@@ -137,8 +135,7 @@ public class DefaultIA : MonoBehaviour
 
                 if(!sommet.defaultZone.ChangeObjetif(-1, sommet, true))
                 {
-                    lastGoal = null;
-                    home = null;
+                    ResetObjetif();
                     return;
                 }
 
@@ -155,23 +152,28 @@ public class DefaultIA : MonoBehaviour
                 if (home.defaultZone.objetif.maxQuantity <= effectiveQuantity) return;
                 
                 if(!sommet.defaultZone.ChangeObjetif(1, sommet,true)) return;
-                home.defaultZone.antsInTransit--;
                 
-                
+
+                if (!home)
+                {
+                    ResetObjetif();
+                    return;
+                }
+                else
+                {
+                    if (home.defaultZone.objetif.id != homeID) return;
+                    home.defaultZone.antsInTransit--;
+
+                }
                 TakeEat(sommet);
                 if (lastGoal.defaultZone.CanChangeObjetif(-1))
                 {
                     goal = lastGoal;
-                    lastGoal = null;
                     FindSommet(currentSommet, goal);
                 }
                 else
                 {
-                    home.defaultZone.AntRemver(this);
-                    
-                    lastGoal = null;
-                    goal = null;
-                    home = null;
+                    ResetObjetif();
                 }
             }
         }
@@ -218,16 +220,47 @@ public class DefaultIA : MonoBehaviour
 
     public void ResetObjetif()
     {
-        if(sheet.gameObject.activeSelf) TakeEat(goal);
-        
-        home.defaultZone.AntRemver(this);
-        
-        if(home.defaultZone.currentAnts.Count <= 0) home.defaultZone.targetSpriteRenderer.gameObject.SetActive(false);
-        
+        if (sheet.gameObject.activeSelf)
+        {
+            if (!goal)
+            {
+                sheet.gameObject.SetActive(false);
+            }
+            else
+            {
+                FindSommet(currentSommet, goal);
+                home = goal;
+                homeID = home.defaultZone.objetif.id;
+                goal = null;
+                lastGoal = null;
+                return;
+            }
+        }
+    
+        if(home)
+        {
+            home.defaultZone.AntRemver(this);
+            if(home.defaultZone.currentAnts.Count <= 0)
+                home.defaultZone.targetSpriteRenderer.gameObject.SetActive(false);
+        }
+        if(goal)
+        {
+            goal.defaultZone.AntRemver(this);
+            if(goal.defaultZone.currentAnts.Count <= 0)
+                goal.defaultZone.targetSpriteRenderer.gameObject.SetActive(false);
+        }
+        if(lastGoal)
+        {
+            lastGoal.defaultZone.AntRemver(this);
+            if(lastGoal.defaultZone.currentAnts.Count <= 0)
+                lastGoal.defaultZone.targetSpriteRenderer.gameObject.SetActive(false);
+        }
+
         lastGoal = null;
         goal = null;
         home = null;
-        
+
+        LevelManager.instance.FreeAnt();
     }
 
     //Attaque une fourmis

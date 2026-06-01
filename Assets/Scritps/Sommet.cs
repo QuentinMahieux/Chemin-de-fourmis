@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Sommet : MonoBehaviour
 {
-    private void Awake()
-    {
-        Debug.Log("Sommet created couco u");  
-    }
-    
-    
     [HideInInspector] public int id;
     public Edge[] edges;
     public DefaultZone defaultZone;

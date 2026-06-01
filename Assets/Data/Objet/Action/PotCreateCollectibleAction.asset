@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d90b37a8b611e4483d97a67a8a64cc, type: 3}
   m_Name: PotCreateCollectibleAction
   m_EditorClassIdentifier: Assembly-CSharp::CreateCollectibleAction
+  finalElementSprite: {fileID: 21300000, guid: 20d5c8070abead042949d6e1789b3216, type: 3}

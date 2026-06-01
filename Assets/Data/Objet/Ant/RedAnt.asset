@@ -17,5 +17,5 @@ MonoBehaviour:
   <speed>k__BackingField: 2.7
   <force>k__BackingField: 2
   <work>k__BackingField: 1
-  <sociability>k__BackingField: 5
+  <level>k__BackingField: 1
   prefab: {fileID: 4232365900651948944, guid: ccc8c1bdfd9b27b44b08cf0da8e8cae1, type: 3}

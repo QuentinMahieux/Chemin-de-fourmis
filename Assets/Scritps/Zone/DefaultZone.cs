@@ -64,8 +64,14 @@ public class DefaultZone : MonoBehaviour
     {
         if ((objetif.id == "0" && objetifBuild == ObjetifBuild.Create) || objetifBuild == ObjetifBuild.Force)
         {
+            foreach(DefaultIA defaultIa in new List<DefaultIA>(currentAnts))
+            {
+                defaultIa.ResetObjetif();
+            }
+            
             objetif = newObjetif;
             elementSpriteRenderer.sprite = objetif.elementSprite;
+            return;
         }
         
      

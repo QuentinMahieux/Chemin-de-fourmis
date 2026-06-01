@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -7,7 +8,10 @@ public class LevelManager : MonoBehaviour
     public Transform spawnPoint;
     public AntData antData;
     public int defaultNum = 0;
-    private List<DefaultIA> ants = new List<DefaultIA>();
+    public List<DefaultIA> ants = new List<DefaultIA>();
+    
+    [Header("Level Information")]
+    public TMP_Text antNumberText;
 
     void Awake()
     {
@@ -32,10 +36,9 @@ public class LevelManager : MonoBehaviour
 
     public DefaultIA ManipuleAnt(Sommet goal, Sommet home)
     {
-        Debug.Log("Start Manipulation");
         foreach (DefaultIA ant in ants)
         {
-            if (!ant.goal && !ant.home)
+            if (!ant.goal && !ant.home && ant.antDataInstance.level >= goal.defaultZone.objetif.level)
             {
                 ant.goal = goal;
                 ant.goalID = goal.defaultZone.objetif.id;
@@ -43,11 +46,22 @@ public class LevelManager : MonoBehaviour
                 ant.homeID = home.defaultZone.objetif.id;
 
                 ant.FindSommet(ant.currentSommet, ant.goal);
-
+                FreeAnt();
                 return ant;
             }
         }
         return null;
+    }
+
+    public void FreeAnt()
+    {
+        int num = 0;
+        foreach (DefaultIA ant in ants)
+        {
+            if (!ant.goal && !ant.home) num++;
+        }
+        
+        antNumberText.text = num.ToString() + "/" + ants.Count.ToString();
     }
 
     public void RemoveAnt(DefaultIA ant)

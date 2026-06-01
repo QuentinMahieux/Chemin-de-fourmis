@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollecteAction : DefaultAction
 {
+    public Sprite finalElementSprite;
+
     public override void Action(Sommet sommet)
     {
         if(sommet.defaultZone.objetif.currenQuantity > 0)
@@ -12,7 +14,7 @@ public class CollecteAction : DefaultAction
         }
         else
         {
-            sommet.defaultZone.elementSpriteRenderer.sprite = sommet.defaultZone.objetif.finalElementSprite;
+            sommet.defaultZone.elementSpriteRenderer.sprite = finalElementSprite;
         }
     }
 }
